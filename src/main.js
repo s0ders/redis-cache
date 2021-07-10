@@ -14,6 +14,15 @@ app.get('/', (req, res) => {
     res.send('Hello World')
 })
 
+
+app.get('/github/:username', async (req, res) => {
+    const { username } = req.params
+    const data = await fetch(`https://api.github.com/users/${username}`)
+    const json = await data.json()
+
+    client.sete
+})
+
 app.listen(port, () => {
     console.log(`App listening on port ${port}`)
 })
