@@ -2,6 +2,8 @@ const axios = require('axios')
 const redis = require('redis')
 const redisClient = redis.createClient()
 
+const cacheExpiration = process.env.CACHE_EXPIRATION || 60
+
 const callGithubApi = async (req, res) => {
     try {
         const { username } = req.params
@@ -13,7 +15,7 @@ const callGithubApi = async (req, res) => {
 
         if(public_repos !== null) {
             res.send(`${username} has ${public_repos} public repo.`)
-            redisClient.setex(username, 60, public_repos)
+            redisClient.setex(username, cacheExpiration, public_repos)
         } else {
             res.send(`No public repo. found for ${username}`)
         }
