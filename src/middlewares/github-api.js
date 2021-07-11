@@ -24,4 +24,4 @@ const callGithubApi = async (req, res) => {
     }
 }
 
-module.exports = { callGithubApi }
+module.exports = callGithubApi

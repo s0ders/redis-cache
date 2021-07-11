@@ -13,4 +13,4 @@ const cache = (req, res, next) => {
     })
 }
 
-module.exports = { cache }
+module.exports = cache
