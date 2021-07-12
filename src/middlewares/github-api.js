@@ -1,15 +1,10 @@
 const axios = require('axios')
-const redis = require('redis')
-const redisClient = redis.createClient()
-
+const redisClient = require('../utils/redis-client')
 const cacheExpiration = process.env.CACHE_EXPIRATION || 60
 
 const callGithubApi = async (req, res) => {
     try {
         const { username } = req.params
-
-        console.log('Calling GitHub API...')
-
         const response = await axios.get(`https://api.github.com/users/${username}`)
         const public_repos =  response.data.public_repos
 
@@ -19,7 +14,6 @@ const callGithubApi = async (req, res) => {
         } else {
             res.send(`No public repo. found for ${username}`)
         }
-
     } 
     catch (err) {
         res.status(500)

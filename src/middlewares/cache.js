@@ -1,5 +1,4 @@
-const redis = require('redis')
-const redisClient = redis.createClient()
+const redisClient = require('../utils/redis-client')
 
 const cache = (req, res, next) => {
     const { username } = req.params
